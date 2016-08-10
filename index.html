@@ -7,13 +7,22 @@
   Paste your object into text area below then click Sort button
 </p>
 <p>
-  <textarea id="source" cols="80" rows="10"></textarea>
+  <textarea id="source" cols="80" rows="10">{
+  c:3,
+  b:2,
+  a:1
+}</textarea>
 </p>
 <p>
   <button id="sort">Sort</button>
 </p>
 <p>
-  <textarea id="output" cols="80" rows="10" readonly></textarea>
+  Javascript:<br>
+  <textarea id="jsoutput" cols="80" rows="10" readonly></textarea>
+</p>
+<p>
+  CoffeeScript:<br>
+  <textarea id="coffeeoutput" cols="80" rows="10" readonly></textarea>
 </p>
 <script src="zepto.min.js"></script>
 <script src="coffee-script.js"></script>
