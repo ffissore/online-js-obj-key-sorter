@@ -30,11 +30,12 @@ function jsFriendlyJSONStringify(str) {
 }
 
 function jsSourceToCoffee(source) {
-  return removeCurlyBraces(source)
+  return js2coffee.build("a =" + source).code
+      .replace("a =", "")
       .split("\n")
       .filter(nonEmptyLines)
-      .map(removeFirstSpaces(INDENTATION))
-      .map(removeTrailingCommas)
+      .map(removeFirstSpace)
+      .map(removeFirstSpace)
       .join("\n");
 }
 
@@ -42,22 +43,8 @@ function nonEmptyLines(line) {
   return line.trim() != "";
 }
 
-function removeFirstSpaces(spaces) {
-  return function (line) {
-    return line.substring(spaces);
-  }
-}
-
-function removeTrailingCommas(line) {
-  return line.replace(/,$/, "");
-}
-
-function removeCurlyBraces(str) {
-  return str
-      .replace(/ \{/g, "")
-      .replace(/\},/g, "")
-      .replace(/\{/g, "")
-      .replace(/\}/g, "");
+function removeFirstSpace(line) {
+  return line.replace(/^ /, "");
 }
 
 function sort(obj) {
