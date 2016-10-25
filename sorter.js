@@ -5,11 +5,15 @@ var INDENTATION = 2;
 $("#sort").click(function () {
   var $jsoutput = $("#jsoutput");
   var $coffeeoutput = $("#coffeeoutput");
+  var $jsonoutput = $("#jsonoutput");
 
   $jsoutput.val("");
   $coffeeoutput.val("");
+  $jsonoutput.val("");
+
+  var source = $("#source").val();
+
   try {
-    var source = $("#source").val();
     var object = eval(CoffeeScript.compile(source, {bare: true}));
     var newObject = sort(object);
     var js = objToJSSource(newObject, INDENTATION);
@@ -18,6 +22,14 @@ $("#sort").click(function () {
     $coffeeoutput.val(coffee);
   } catch (e) {
     $jsoutput.val(e);
+  }
+
+  try {
+    var json = JSON.parse(source);
+    var newJSON = sort(json);
+    $jsonoutput.val(JSON.stringify(newJSON, null, INDENTATION));
+  } catch (e) {
+    $jsonoutput.val(e);
   }
 });
 
